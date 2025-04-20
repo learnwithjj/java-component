@@ -9,14 +9,14 @@ on:
 
 jobs:
   build:
-   uses: susanto-dev/devops-infra/.github/workflows/ci-pipeline.yml@develop
+   uses: learnwithjj/devops-infra/.github/workflows/ci-pipeline.yml@develop
    secrets: inherit
    with:
      component: 'java'
 
   deploy-to-dev:
    needs: [build]
-   uses: susanto-dev/devops-infra/.github/workflows/cd.yml@develop
+   uses: learnwithjj/devops-infra/.github/workflows/cd.yml@develop
    secrets: inherit
    with:
      repository: 'java-component'
@@ -26,7 +26,7 @@ jobs:
 
   deploy-to-uat:
    needs: [build]
-   uses: susanto-dev/devops-infra/.github/workflows/cd.yml@develop
+   uses: learnwithjj/devops-infra/.github/workflows/cd.yml@develop
    secrets: inherit
    with:
      repository: 'java-component'
@@ -36,7 +36,7 @@ jobs:
 
   deploy-to-prod:
    needs: [build]
-   uses: susanto-dev/devops-infra/.github/workflows/cd.yml@develop
+   uses: learnwithjj/devops-infra/.github/workflows/cd.yml@develop
    secrets: inherit
    with:
      repository: 'java-component'

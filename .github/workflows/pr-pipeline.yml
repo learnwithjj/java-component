@@ -9,7 +9,7 @@ permissions:
   actions: read
 jobs:
   pipeline:
-   uses: susanto-dev/devops-infra/.github/workflows/pr-pipeline.yml@develop
+   uses: learnwithjj/devops-infra/.github/workflows/pr-pipeline.yml@develop
    secrets: inherit
    with:
      component: 'java'
