@@ -1,0 +1,45 @@
+name: CI pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - README.md
+
+jobs:
+  build:
+   uses: susanto-dev/devops-infra/.github/workflows/ci-pipeline.yml@develop
+   secrets: inherit
+   with:
+     component: 'java'
+
+  deploy-to-dev:
+   needs: [build]
+   uses: susanto-dev/devops-infra/.github/workflows/cd.yml@develop
+   secrets: inherit
+   with:
+     repository: 'java-component'
+     version: '${{ needs.build.outputs.build_version }}'
+     environment: 'dev'
+     component: 'java'
+
+  deploy-to-uat:
+   needs: [build]
+   uses: susanto-dev/devops-infra/.github/workflows/cd.yml@develop
+   secrets: inherit
+   with:
+     repository: 'java-component'
+     version: '${{ needs.build.outputs.build_version }}'
+     environment: 'uat'
+     component: 'java'
+
+  deploy-to-prod:
+   needs: [build]
+   uses: susanto-dev/devops-infra/.github/workflows/cd.yml@develop
+   secrets: inherit
+   with:
+     repository: 'java-component'
+     version: '${{ needs.build.outputs.build_version }}'
+     environment: 'prod'
+     component: 'java'
